@@ -9,4 +9,11 @@ users:list=[
     {'name':'Dominik','posts':12,'city':'Szczecin'},
     {'name':'Kinga','posts':13,'city':'Bydgoszcz'},
     {'name':'Aleksandra','posts':14,'city':'Gdańsk'},
+    {'name': 'Julia', 'posts': 15, 'city': 'Zamość'},
+    {'name': 'Karolina', 'posts': 16, 'city': 'Gdynia'},
+    {'name': 'Amelia', 'posts': 17, 'city': 'Kraków'},
+    {'name': 'Patrycja', 'posts': 18, 'city': 'Sopot'},
+    {'name': 'Patrycja', 'posts': 19, 'city': 'Gniezno'},
+
+
 ]
