@@ -12,7 +12,6 @@ users:list=[
 
 
 ]
-#TODO please update user list
 
 print (f'Witaj {users[0]['name']}!!')
 for user in users[1:]:
