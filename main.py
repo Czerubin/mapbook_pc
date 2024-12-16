@@ -1,9 +1,35 @@
 # from mapbook.map_functions import single_user_map, multi_user_map
 # from mapbook.users import users
 # from mapbook.crud import hello, read_users, add_user, remove_user, update_user
+
 from tkinter import *
 
 import tkintermapview
+
+
+
+
+
+
+class User:
+    def __init__(self,imie, nazwisko, postow, lokalizacja):
+        self.imie = imie
+        self.nazwisko = nazwisko
+        self.postow = postow
+        self.lokalizacja = lokalizacja
+
+users = [
+    User('aaa', 'aaa', '1','aaa'),
+    User('bbb', 'bbb', '2','bbb'),
+    User('ccc', 'ccc', '3','ccc'),
+]
+def show_users():
+
+    for idx, user in enumerate (users):
+        listbox_lista_obiektow.insert(idx, user.imie)
+
+
+
 
 root=Tk()
 root.geometry("800x600")
@@ -84,6 +110,9 @@ map_widget=tkintermapview.TkinterMapView(ramka_szczegoly_obiektu, width=600, hei
 map_widget.set_position(deg_x=52.0,deg_y=21)
 map_widget.set_zoom(6)
 map_widget.grid(row=3, column=0, columnspan=8)
+
+show_users ()
+
 
 root.mainloop()
 
