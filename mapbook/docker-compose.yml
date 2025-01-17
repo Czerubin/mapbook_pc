@@ -1,0 +1,15 @@
+services:
+  postgis:
+    image: postgis/postgis:14-3.4-alpine
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=aaaaaaa
+      - POSTGRES_USER=aaaaaaa
+      - POSTGRES_DB=aaaaaaa
+    ports:
+      - 5434:5432
+    volumes:
+      - postgis-data:/var/lib/postgresql/data
+
+volumes:
+  postgis-data:
