@@ -3,31 +3,27 @@ from tkinter import *
 import requests
 from bs4 import BeautifulSoup
 import tkintermapview
-import psycopg2 as ps
+
 
 root=Tk()
 root.geometry("800x600")
 root.title('mapbook')
 
-db_params=ps.connect(user='aaaaaaa',password='aaaaaaa',host='localhost',database='aaaaaaa', port='5434')
-
-
-
-
-
 
 class User:
-    def __init__(self, imie, nazwsiko, postow, lokalizacja, coordinates):
+    def __init__(self, imie, nazwsiko, postow, lokalizacja):
         self.imie = imie
         self.nazwsiko = nazwsiko
         self.postow = postow
         self.lokalizacja = lokalizacja
-        self.coords:list=coordinates #User.get_coordinates(self)
+        self.coords:list=User.get_coordinates(self)
         self.marker=map_widget.set_marker(
             self.coords[0],
             self.coords[1],
             text=f'{self.imie}{self.nazwsiko}',
         )
+
+
 
 
     def get_coordinates(self)->list:#ta funckja zwraca liste
@@ -44,18 +40,10 @@ users=[
     # User('Kasia','Kowalska','7','Warszawa'),
     # User('Adam','Nowak','2','Wrocław'),
 ]
-
 def show_users():
-    cursor = db_params.cursor()
-    query = 'SELECT name,surname,posts,location,st_astext(coordinates),id FROM public.users ORDER BY id ASC'
-    cursor.execute(query)
-    users_db = cursor.fetchall()
-    cursor.close()
     listbox_lista_obiektow.delete(0, END)
-    for idx, user in enumerate(users_db):
-        User(user[0],user[1],user[2],user[3],[float(user[4][6:-1].split()[1]),float(user[4][6:-1].split()[0])]),
-        listbox_lista_obiektow.insert(idx, f'{user[0]} {user[1]} {user[2]} {user[3]}')
-
+    for idx, user in enumerate(users):
+        listbox_lista_obiektow.insert(idx, f'{user.imie} {user.nazwsiko}{user.postow}{user.lokalizacja}')
 
 def add_user()->None:
     name=entry_imie.get()
@@ -63,7 +51,7 @@ def add_user()->None:
     posts=entry_liczba_postow.get()
     location=entry_lokalizacja.get()
 
-    new_user=User(name,surname,posts,location,coordinates=[11.0,20.1])
+    new_user=User(name,surname,posts,location)
 
     users.append(new_user)
     show_users()
