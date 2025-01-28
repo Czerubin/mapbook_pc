@@ -20,7 +20,7 @@ def main():
                 self.marker = map_widget.set_marker(
                     self.coordinates[0],
                     self.coordinates[1],
-                    text=f'Wydarzenie: {self.event}\nPracownik: {self.employee}\nGość: {self.guest}'
+                    text=f'{self.event}\n'
                 )
 
 
@@ -65,7 +65,7 @@ def main():
             for idx, record in enumerate(records):
                 listbox_records.insert(
                     idx,
-                    f"Wydarzenie: {record.event} | Pracownik: {record.employee} | Gość: {record.guest} | Lokalizacja: {record.location}"
+                    f"{record.event} | Pracownik: {record.employee} | Gość: {record.guest} | Lokalizacja: {record.location}"
                 )
 
         def add_record():
@@ -121,7 +121,7 @@ def main():
                 record.marker = map_widget.set_marker(
                     record.coordinates[0],
                     record.coordinates[1],
-                    text=f'Wydarzenie: {record.event}\nPracownik: {record.employee}\nGość: {record.guest}'
+                    text=f'{record.event}'
                 )
 
                 clear_inputs([entry_event, entry_employee, entry_guest, entry_location])
@@ -131,7 +131,7 @@ def main():
         # Tworzenie głównego okna
         root = Tk()
         root.geometry("1000x800")
-        root.title("Zarządzanie Wydarzeniemi, Pracownikami i Gośćmi")
+        root.title("Zarządzanie wydarzeniemi sportowymi, pracownikami oraz gośćmi")
         root.configure(bg="#E0B0FF")
 
         # Mapa
@@ -167,7 +167,7 @@ def main():
 
         # Lista rekordów
         Label(root, text="Lista rekordów:", bg="#4B0082", fg="white").grid(row=7, column=0, sticky=W, padx=5)
-        listbox_records = Listbox(root, width=60, height=10, bg="#E0FFFF", fg="black")
+        listbox_records = Listbox(root, width=100, height=10, bg="#E0FFFF", fg="black")
         listbox_records.grid(row=8, column=0, columnspan=3, padx=5, pady=5)
 
         root.mainloop()
