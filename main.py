@@ -3,6 +3,7 @@ import tkintermapview
 
 
 
+
 def main():
     def show_main_window():
         login_window.destroy()  # Zamknij okno logowania
@@ -20,7 +21,7 @@ def main():
                 self.marker = map_widget.set_marker(
                     self.coordinates[0],
                     self.coordinates[1],
-                    text=f'Wydarzenie: {self.event}\nPracownik: {self.employee}\nGość: {self.guest}'
+                    text=f'{self.event}\n'
                 )
 
 
@@ -28,27 +29,57 @@ def main():
                 try:
                     # Zwraca współrzędne lokalizacji, domyślnie (52.0, 21.0)
                     city_coords = {
-                        "Warszawa": (52.2297, 21.0122),
-                        "Kraków": (50.0647, 19.9450),
-                        "Łódź": (51.7592, 19.4560),
-                        "Wrocław": (51.1079, 17.0385),
-                        "Poznań": (52.4064, 16.9252),
-                        "Gdańsk": (54.3520, 18.6466),
-                        "Szczecin": (53.4285, 14.5528),
-                        "Bydgoszcz": (53.1235, 18.0084),
-                        "Lublin": (51.2465, 22.5684),
-                        "Białystok": (53.1325, 23.1688),
-                        "Katowice": (50.2649, 19.0238),
-                        "Gdynia": (54.5189, 18.5305),
-                        "Częstochowa": (50.8118, 19.1203),
-                        "Radom": (51.4027, 21.1471),
-                        "Sosnowiec": (50.2864, 19.1046),
-                        "Toruń": (53.0138, 18.5984),
-                        "Kielce": (50.8661, 20.6286),
-                        "Gliwice": (50.2945, 18.6658),
-                        "Zabrze": (50.3244, 18.7851),
-                        "Bielsko-Biała": (49.8224, 19.0464)
-                    }
+                            "Warszawa": (52.2297, 21.0122),
+                            "Kraków": (50.0647, 19.9450),
+                            "Wrocław": (51.1079, 17.0385),
+                            "Łódź": (51.7592, 19.4560),
+                            "Poznań": (52.4064, 16.9252),
+                            "Gdańsk": (54.3520, 18.6466),
+                            "Szczecin": (53.4285, 14.5528),
+                            "Lublin": (51.2465, 22.5684),
+                            "Bydgoszcz": (53.1235, 18.0084),
+                            "Białystok": (53.1325, 23.1688),
+                            "Katowice": (50.2649, 19.0238),
+                            "Gdynia": (54.5189, 18.5305),
+                            "Częstochowa": (50.8118, 19.1203),
+                            "Radom": (51.4027, 21.1471),
+                            "Rzeszów": (50.0413, 21.9990),
+                            "Toruń": (53.0138, 18.5984),
+                            "Sosnowiec": (50.2864, 19.1046),
+                            "Kielce": (50.8661, 20.6286),
+                            "Gliwice": (50.2945, 18.6658),
+                            "Olsztyn": (53.7784, 20.4801),
+                            "Zabrze": (50.3249, 18.7857),
+                            "Bytom": (50.3484, 18.9157),
+                            "Zielona Góra": (51.9355, 15.5062),
+                            "Rybnik": (50.0971, 18.5419),
+                            "Ruda Śląska": (50.2558, 18.8556),
+                            "Opole": (50.6751, 17.9213),
+                            "Tychy": (50.1372, 18.9664),
+                            "Gorzów Wielkopolski": (52.7368, 15.2288),
+                            "Dąbrowa Górnicza": (50.3180, 19.2370),
+                            "Elbląg": (54.1522, 19.4088),
+                            "Płock": (52.5463, 19.7065),
+                            "Koszalin": (54.1944, 16.1722),
+                            "Tarnów": (50.0121, 20.9858),
+                            "Włocławek": (52.6482, 19.0678),
+                            "Chorzów": (50.3058, 18.9742),
+                            "Wałbrzych": (50.7714, 16.2843),
+                            "Piaseczno": (52.0733, 21.0269),
+                            "Kalisz": (51.7611, 18.0910),
+                            "Legnica": (51.2070, 16.1557),
+                            "Grudziądz": (53.4840, 18.7530),
+                            "Jaworzno": (50.2057, 19.2740),
+                            "Słupsk": (54.4641, 17.0287),
+                            "Jastrzębie-Zdrój": (49.9477, 18.6000),
+                            "Nowy Sącz": (49.6210, 20.6970),
+                            "Jelenia Góra": (50.9044, 15.7194),
+                            "Siedlce": (52.1677, 22.2900),
+                            "Mysłowice": (50.2060, 19.1664),
+                            "Piła": (53.1517, 16.7383),
+                            "Ostrów Wielkopolski": (51.6554, 17.8067)
+                        }
+
                     return city_coords.get(self.location, (52.0, 21.0))
                 except:
                     return [52.0, 21.0]
@@ -121,7 +152,7 @@ def main():
                 record.marker = map_widget.set_marker(
                     record.coordinates[0],
                     record.coordinates[1],
-                    text=f'Wydarzenie: {record.event}\nPracownik: {record.employee}\nGość: {record.guest}'
+                    text=f'{record.event}'
                 )
 
                 clear_inputs([entry_event, entry_employee, entry_guest, entry_location])
@@ -131,7 +162,7 @@ def main():
         # Tworzenie głównego okna
         root = Tk()
         root.geometry("1000x800")
-        root.title("Zarządzanie Wydarzeniemi, Pracownikami i Gośćmi")
+        root.title("Zarządzanie wydarzeniemi sportowymi, pracownikami oraz gośćmi")
         root.configure(bg="#E0B0FF")
 
         # Mapa
@@ -141,6 +172,7 @@ def main():
         map_widget.set_position(52.0, 21.0)
         map_widget.set_zoom(6)
         map_widget.pack(fill=BOTH, expand=True)
+
 
         # Formularz
         Label(root, text="Wydarzenie:", bg="#4B0082", fg="white").grid(row=0, column=3, sticky=W, padx=5)
@@ -167,7 +199,7 @@ def main():
 
         # Lista rekordów
         Label(root, text="Lista rekordów:", bg="#4B0082", fg="white").grid(row=7, column=0, sticky=W, padx=5)
-        listbox_records = Listbox(root, width=60, height=10, bg="#E0FFFF", fg="black")
+        listbox_records = Listbox(root, width=100, height=10, bg="#E0FFFF", fg="black")
         listbox_records.grid(row=8, column=0, columnspan=3, padx=5, pady=5)
 
         root.mainloop()
@@ -186,12 +218,9 @@ def main():
     password_entry = Entry(login_window, show="*")
     password_entry.pack()
 
-    Button(login_window, text="Zaloguj", command=show_main_window, bg="#4682B4", fg="white").pack(pady=10)
+    Button(login_window, text="Zaloguj", command=show_main_window, bg="#4B0082", fg="white").pack(pady=10)
     login_window.mainloop()
 
 
 if __name__ == '__main__':
     main()
-
-
-    # czary

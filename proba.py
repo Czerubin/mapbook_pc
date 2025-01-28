@@ -3,6 +3,7 @@ import tkintermapview
 
 
 
+
 def main():
     def show_main_window():
         login_window.destroy()  # Zamknij okno logowania
@@ -65,7 +66,7 @@ def main():
             for idx, record in enumerate(records):
                 listbox_records.insert(
                     idx,
-                    f"{record.event} | Pracownik: {record.employee} | Gość: {record.guest} | Lokalizacja: {record.location}"
+                    f"Wydarzenie: {record.event} | Pracownik: {record.employee} | Gość: {record.guest} | Lokalizacja: {record.location}"
                 )
 
         def add_record():
@@ -142,6 +143,7 @@ def main():
         map_widget.set_zoom(6)
         map_widget.pack(fill=BOTH, expand=True)
 
+
         # Formularz
         Label(root, text="Wydarzenie:", bg="#4B0082", fg="white").grid(row=0, column=3, sticky=W, padx=5)
         entry_event = Entry(root, width=30)
@@ -186,7 +188,7 @@ def main():
     password_entry = Entry(login_window, show="*")
     password_entry.pack()
 
-    Button(login_window, text="Zaloguj", command=show_main_window, bg="#4682B4", fg="white").pack(pady=10)
+    Button(login_window, text="Zaloguj", command=show_main_window, bg="#4B0082", fg="white").pack(pady=10)
     login_window.mainloop()
 
 
