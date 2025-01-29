@@ -2,8 +2,6 @@ from tkinter import *
 import tkintermapview
 
 
-
-
 def main():
     def show_main_window():
         login_window.destroy()  # Zamknij okno logowania
@@ -24,67 +22,64 @@ def main():
                     text=f'{self.event}\n'
                 )
 
-
             def get_coordinates(self):
                 try:
-                    # Zwraca współrzędne lokalizacji, domyślnie (52.0, 21.0)
+                    # Zwraca wspórzędne lokalizacji, domyślnie (52.0, 21.0)
                     city_coords = {
-                            "Warszawa": (52.2297, 21.0122),
-                            "Kraków": (50.0647, 19.9450),
-                            "Wrocław": (51.1079, 17.0385),
-                            "Łódź": (51.7592, 19.4560),
-                            "Poznań": (52.4064, 16.9252),
-                            "Gdańsk": (54.3520, 18.6466),
-                            "Szczecin": (53.4285, 14.5528),
-                            "Lublin": (51.2465, 22.5684),
-                            "Bydgoszcz": (53.1235, 18.0084),
-                            "Białystok": (53.1325, 23.1688),
-                            "Katowice": (50.2649, 19.0238),
-                            "Gdynia": (54.5189, 18.5305),
-                            "Częstochowa": (50.8118, 19.1203),
-                            "Radom": (51.4027, 21.1471),
-                            "Rzeszów": (50.0413, 21.9990),
-                            "Toruń": (53.0138, 18.5984),
-                            "Sosnowiec": (50.2864, 19.1046),
-                            "Kielce": (50.8661, 20.6286),
-                            "Gliwice": (50.2945, 18.6658),
-                            "Olsztyn": (53.7784, 20.4801),
-                            "Zabrze": (50.3249, 18.7857),
-                            "Bytom": (50.3484, 18.9157),
-                            "Zielona Góra": (51.9355, 15.5062),
-                            "Rybnik": (50.0971, 18.5419),
-                            "Ruda Śląska": (50.2558, 18.8556),
-                            "Opole": (50.6751, 17.9213),
-                            "Tychy": (50.1372, 18.9664),
-                            "Gorzów Wielkopolski": (52.7368, 15.2288),
-                            "Dąbrowa Górnicza": (50.3180, 19.2370),
-                            "Elbląg": (54.1522, 19.4088),
-                            "Płock": (52.5463, 19.7065),
-                            "Koszalin": (54.1944, 16.1722),
-                            "Tarnów": (50.0121, 20.9858),
-                            "Włocławek": (52.6482, 19.0678),
-                            "Chorzów": (50.3058, 18.9742),
-                            "Wałbrzych": (50.7714, 16.2843),
-                            "Piaseczno": (52.0733, 21.0269),
-                            "Kalisz": (51.7611, 18.0910),
-                            "Legnica": (51.2070, 16.1557),
-                            "Grudziądz": (53.4840, 18.7530),
-                            "Jaworzno": (50.2057, 19.2740),
-                            "Słupsk": (54.4641, 17.0287),
-                            "Jastrzębie-Zdrój": (49.9477, 18.6000),
-                            "Nowy Sącz": (49.6210, 20.6970),
-                            "Jelenia Góra": (50.9044, 15.7194),
-                            "Siedlce": (52.1677, 22.2900),
-                            "Mysłowice": (50.2060, 19.1664),
-                            "Piła": (53.1517, 16.7383),
-                            "Ostrów Wielkopolski": (51.6554, 17.8067)
-                        }
+                        "Warszawa": (52.2297, 21.0122),
+                        "Kraków": (50.0647, 19.9450),
+                        "Wrocław": (51.1079, 17.0385),
+                        "Łódź": (51.7592, 19.4560),
+                        "Poznań": (52.4064, 16.9252),
+                        "Gdańsk": (54.3520, 18.6466),
+                        "Szczecin": (53.4285, 14.5528),
+                        "Lublin": (51.2465, 22.5684),
+                        "Bydgoszcz": (53.1235, 18.0084),
+                        "Białystok": (53.1325, 23.1688),
+                        "Katowice": (50.2649, 19.0238),
+                        "Gdynia": (54.5189, 18.5305),
+                        "Częstochowa": (50.8118, 19.1203),
+                        "Radom": (51.4027, 21.1471),
+                        "Rzeszów": (50.0413, 21.9990),
+                        "Toruń": (53.0138, 18.5984),
+                        "Sosnowiec": (50.2864, 19.1046),
+                        "Kielce": (50.8661, 20.6286),
+                        "Gliwice": (50.2945, 18.6658),
+                        "Olsztyn": (53.7784, 20.4801),
+                        "Zabrze": (50.3249, 18.7857),
+                        "Bytom": (50.3484, 18.9157),
+                        "Zielona Góra": (51.9355, 15.5062),
+                        "Rybnik": (50.0971, 18.5419),
+                        "Ruda Śląska": (50.2558, 18.8556),
+                        "Opole": (50.6751, 17.9213),
+                        "Tychy": (50.1372, 18.9664),
+                        "Gorzów Wielkopolski": (52.7368, 15.2288),
+                        "Dąbrowa Górnicza": (50.3180, 19.2370),
+                        "Elbląg": (54.1522, 19.4088),
+                        "Płock": (52.5463, 19.7065),
+                        "Koszalin": (54.1944, 16.1722),
+                        "Tarnów": (50.0121, 20.9858),
+                        "Włocławek": (52.6482, 19.0678),
+                        "Chorzów": (50.3058, 18.9742),
+                        "Wałbrzych": (50.7714, 16.2843),
+                        "Piaseczno": (52.0733, 21.0269),
+                        "Kalisz": (51.7611, 18.0910),
+                        "Legnica": (51.2070, 16.1557),
+                        "Grudziądz": (53.4840, 18.7530),
+                        "Jaworzno": (50.2057, 19.2740),
+                        "Słupsk": (54.4641, 17.0287),
+                        "Jastrzębie-Zdrój": (49.9477, 18.6000),
+                        "Nowy Sącz": (49.6210, 20.6970),
+                        "Jelenia Góra": (50.9044, 15.7194),
+                        "Siedlce": (52.1677, 22.2900),
+                        "Mysłowice": (50.2060, 19.1664),
+                        "Piła": (53.1517, 16.7383),
+                        "Ostrów Wielkopolski": (51.6554, 17.8067)
+                    }
 
                     return city_coords.get(self.location, (52.0, 21.0))
                 except:
                     return [52.0, 21.0]
-
-
 
         def clear_inputs(entries):
             for entry in entries:
@@ -159,10 +154,30 @@ def main():
                 button_add.config(text="Dodaj", command=add_record)
                 update_listbox()
 
+        def show_employees():
+            # Wyświetla listę pracowników
+            employees = [record.employee for record in records]
+            show_list_window("Lista Pracowników", employees)
+
+        def show_guests():
+            # Wyświetla listę gości
+            guests = [record.guest for record in records]
+            show_list_window("Lista Gości", guests)
+
+        def show_list_window(title, items):
+            # Tworzy nowe okno do wyświetlania listy
+            list_window = Toplevel(root)
+            list_window.title(title)
+            listbox = Listbox(list_window, width=50, height=20)
+            listbox.pack(padx=10, pady=10)
+
+            for item in items:
+                listbox.insert(END, item)
+
         # Tworzenie głównego okna
         root = Tk()
         root.geometry("1000x800")
-        root.title("Zarządzanie wydarzeniemi sportowymi, pracownikami oraz gośćmi")
+        root.title("Zarządzanie wydarzeniemi sportowymi, pracownikami oraz gośmi")
         root.configure(bg="#E0B0FF")
 
         # Mapa
@@ -172,7 +187,6 @@ def main():
         map_widget.set_position(52.0, 21.0)
         map_widget.set_zoom(6)
         map_widget.pack(fill=BOTH, expand=True)
-
 
         # Formularz
         Label(root, text="Wydarzenie:", bg="#4B0082", fg="white").grid(row=0, column=3, sticky=W, padx=5)
@@ -196,6 +210,10 @@ def main():
 
         Button(root, text="Usuń", command=delete_record, bg="#4B0082", fg="white", width=15).grid(row=5, column=4, columnspan=2, pady=5)
         Button(root, text="Edytuj", command=edit_record, bg="#4B0082", fg="white", width=15).grid(row=6, column=4, columnspan=2, pady=5)
+
+        # Przycisk do wyświetlania list
+        Button(root, text="Lista Pracowników", command=show_employees, bg="#4B0082", fg="white", width=20).grid(row=8, column=3, pady=5)
+        Button(root, text="Lista Gości", command=show_guests, bg="#4B0082", fg="white", width=20).grid(row=8, column=4, pady=5)
 
         # Lista rekordów
         Label(root, text="Lista rekordów:", bg="#4B0082", fg="white").grid(row=7, column=0, sticky=W, padx=5)
@@ -224,5 +242,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-    # czary
