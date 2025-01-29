@@ -24,7 +24,6 @@ def main():
 
             def get_coordinates(self):
                 try:
-                    # Zwraca wspórzędne lokalizacji, domyślnie (52.0, 21.0)
                     city_coords = {
                         "Warszawa": (52.2297, 21.0122),
                         "Kraków": (50.0647, 19.9450),
@@ -76,7 +75,6 @@ def main():
                         "Piła": (53.1517, 16.7383),
                         "Ostrów Wielkopolski": (51.6554, 17.8067)
                     }
-
                     return city_coords.get(self.location, (52.0, 21.0))
                 except:
                     return [52.0, 21.0]
@@ -86,7 +84,6 @@ def main():
                 entry.delete(0, END)
 
         def update_listbox():
-            # Aktualizuje listę wyświetlaną w listboxie.
             listbox_records.delete(0, END)
             for idx, record in enumerate(records):
                 listbox_records.insert(
@@ -95,7 +92,6 @@ def main():
                 )
 
         def add_record():
-            # Dodaje nowe wydarzenie, pracownika i gościa jednocześnie.
             event = entry_event.get().strip()
             employee = entry_employee.get().strip()
             guest = entry_guest.get().strip()
@@ -108,32 +104,27 @@ def main():
                 clear_inputs([entry_event, entry_employee, entry_guest, entry_location])
 
         def delete_record():
-            # Usuwa wybrany rekord z listy i mapy.
             selected_index = listbox_records.curselection()
             if selected_index:
                 idx = selected_index[0]
-                records[idx].marker.delete()  # Usuwanie znacznika z mapy
-                records.pop(idx)  # Usuwanie z listy
+                records[idx].marker.delete()
+                records.pop(idx)
                 update_listbox()
 
         def edit_record():
-            # Edytuje wybrany rekord.
             selected_index = listbox_records.curselection()
             if selected_index:
                 idx = selected_index[0]
                 record = records[idx]
 
-                # Wypełnij pola edytowalnymi wartościami
                 entry_event.insert(0, record.event)
                 entry_employee.insert(0, record.employee)
                 entry_guest.insert(0, record.guest)
                 entry_location.insert(0, record.location)
 
-                # Zmień działanie przycisku "Dodaj"
                 button_add.config(text="Zapisz zmiany", command=lambda: save_changes(idx))
 
         def save_changes(idx):
-            # Zapisuje zmiany w rekordzie.
             if entry_event.get().strip() and entry_employee.get().strip() and entry_guest.get().strip() and entry_location.get().strip():
                 record = records[idx]
                 record.event = entry_event.get()
@@ -142,7 +133,6 @@ def main():
                 record.location = entry_location.get()
                 record.coordinates = record.get_coordinates()
 
-                # Aktualizacja znacznika na mapie
                 record.marker.delete()
                 record.marker = map_widget.set_marker(
                     record.coordinates[0],
@@ -155,32 +145,34 @@ def main():
                 update_listbox()
 
         def show_employees():
-            # Wyświetla listę pracowników
-            employees = [record.employee for record in records]
-            show_list_window("Lista Pracowników", employees)
+            event_filter = event_combobox.get().strip()
+            employee_window = Toplevel(root)
+            employee_window.title("Lista Pracowników")
+            employee_listbox = Listbox(employee_window, width=50, height=20)
+            employee_listbox.pack(padx=10, pady=10)
+
+            filtered_employees = [record.employee for record in records if record.event == event_filter]
+
+            for employee in filtered_employees:
+                employee_listbox.insert(END, employee)
 
         def show_guests():
-            # Wyświetla listę gości
-            guests = [record.guest for record in records]
-            show_list_window("Lista Gości", guests)
+            event_filter = event_combobox.get().strip()
+            guest_window = Toplevel(root)
+            guest_window.title("Lista Gości")
+            guest_listbox = Listbox(guest_window, width=50, height=20)
+            guest_listbox.pack(padx=10, pady=10)
 
-        def show_list_window(title, items):
-            # Tworzy nowe okno do wyświetlania listy
-            list_window = Toplevel(root)
-            list_window.title(title)
-            listbox = Listbox(list_window, width=50, height=20)
-            listbox.pack(padx=10, pady=10)
+            filtered_guests = [record.guest for record in records if record.event == event_filter]
 
-            for item in items:
-                listbox.insert(END, item)
+            for guest in filtered_guests:
+                guest_listbox.insert(END, guest)
 
-        # Tworzenie głównego okna
         root = Tk()
         root.geometry("1000x800")
         root.title("Zarządzanie wydarzeniemi sportowymi, pracownikami oraz gośmi")
         root.configure(bg="#E0B0FF")
 
-        # Mapa
         map_frame = Frame(root, bg="#4682B4")
         map_frame.grid(row=0, column=0, rowspan=6, sticky="nsew", padx=5, pady=5)
         map_widget = tkintermapview.TkinterMapView(map_frame, width=600, height=500)
@@ -188,7 +180,6 @@ def main():
         map_widget.set_zoom(6)
         map_widget.pack(fill=BOTH, expand=True)
 
-        # Formularz
         Label(root, text="Wydarzenie:", bg="#4B0082", fg="white").grid(row=0, column=3, sticky=W, padx=5)
         entry_event = Entry(root, width=30)
         entry_event.grid(row=0, column=4, sticky=W, padx=5)
@@ -211,18 +202,19 @@ def main():
         Button(root, text="Usuń", command=delete_record, bg="#4B0082", fg="white", width=15).grid(row=5, column=4, columnspan=2, pady=5)
         Button(root, text="Edytuj", command=edit_record, bg="#4B0082", fg="white", width=15).grid(row=6, column=4, columnspan=2, pady=5)
 
-        # Przycisk do wyświetlania list
-        Button(root, text="Lista Pracowników", command=show_employees, bg="#4B0082", fg="white", width=20).grid(row=8, column=3, pady=5)
-        Button(root, text="Lista Gości", command=show_guests, bg="#4B0082", fg="white", width=20).grid(row=8, column=4, pady=5)
-
-        # Lista rekordów
         Label(root, text="Lista rekordów:", bg="#4B0082", fg="white").grid(row=7, column=0, sticky=W, padx=5)
-        listbox_records = Listbox(root, width=100, height=10, bg="#E0FFFF", fg="black")
+        listbox_records = Listbox(root, width=90, height=10, bg="#E0FFFF", fg="black")
         listbox_records.grid(row=8, column=0, columnspan=3, padx=5, pady=5)
+
+        Label(root, text="Wybierz wydarzenie:", bg="#4B0082", fg="white").grid(row=7, column=3, sticky=W, padx=5)
+        event_combobox = Entry(root, width=30)
+        event_combobox.grid(row=7, column=4, sticky=W, padx=5)
+
+        Button(root, text="Lista Pracowników", command=show_employees, bg="#4B0082", fg="white", width=20).grid(row=8, column=2, columnspan=2, pady=5)
+        Button(root, text="Lista Gości", command=show_guests, bg="#4B0082", fg="white", width=20).grid(row=8, column=4, columnspan=2, pady=5)
 
         root.mainloop()
 
-    # Okno logowania`
     login_window = Tk()
     login_window.geometry("400x200")
     login_window.title("Logowanie")
